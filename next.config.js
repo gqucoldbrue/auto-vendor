@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: false,  // Disabled for compatibility with React 17
-  // This tells Next.js how to handle certain imports
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, path: false };
-    return config;
+  // Add specific settings for Vercel deployment
+  swcMinify: true,
+  // Ensure we're handling images correctly
+  images: {
+    domains: [],
+    unoptimized: true
   }
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
