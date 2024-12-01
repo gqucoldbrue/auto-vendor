@@ -1,8 +1,11 @@
+// pages/index.tsx
 import React from 'react';
+
 export default function Home() {
-    <div>
-      <h1>Welcome to Luxury Auto Platform</h1>
-    </div>
   return (
-  )
+    <div>
+      <h1>Welcome to Auto Vendor</h1>
+      <p>Site under construction</p>
+    </div>
+  );
 }
