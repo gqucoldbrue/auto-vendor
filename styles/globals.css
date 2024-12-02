@@ -24,4 +24,25 @@
     .luxury-button {
       @apply w-full bg-black text-white py-4 rounded-lg text-lg font-medium hover:bg-gray-900 transition-colors;
     }
+
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .fade-in {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    
+    .shake {
+      animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    
+    @keyframes shake {
+      10%, 90% { transform: translateX(-1px); }
+      20%, 80% { transform: translateX(2px); }
+      30%, 50%, 70% { transform: translateX(-2px); }
+      40%, 60% { transform: translateX(2px); }
+    }
   }

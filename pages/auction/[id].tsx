@@ -1,5 +1,12 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { GetStaticProps, GetStaticPaths } from 'next';
+
+interface AuctionParams {
+  params: {
+    id: string;
+  };
+}
 
 const AuctionDetailPage = () => {
   const router = useRouter();
@@ -26,6 +33,21 @@ export async function getStaticProps({ params }) {
       id: params?.id
     },
   };
+}
+
+  export const getStaticPaths: GetStaticPaths = async () => {
+    return {
+      paths: [],
+      fallback: 'blocking'
+    };
+  };
+  
+  export const getStaticProps: GetStaticProps = async ({ params }: AuctionParams) => {
+    return {
+      props: {
+        id: params?.id || null
+      },
+    };
 }
 
 export default AuctionDetailPage;
