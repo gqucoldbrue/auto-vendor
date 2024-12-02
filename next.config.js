@@ -1,13 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
-  // Add specific settings for Vercel deployment
-  swcMinify: true,
-  // Ensure we're handling images correctly
   images: {
-    domains: [],
-    unoptimized: true
-  }
-}
-
-module.exports = nextConfig
+    unoptimized: true // Required for static export
+  },
+  trailingSlash: true, // Recommended for static exports
+};

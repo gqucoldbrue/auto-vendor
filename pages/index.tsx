@@ -1,24 +1,27 @@
-import Head from 'next/head'
+// pages/index.tsx
+import React from 'react';
+import Link from 'next/link';
 
-export default function Home() {
+const HomePage = () => {
   return (
-    <>
-      <Head>
-        <title>Auto Vendor</title>
-        <meta name="description" content="Luxury automotive solutions" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="container mx-auto px-4">
+      <h1 className="text-4xl font-bold my-8">Luxury Auto Auctions</h1>
+      <nav>
+        <Link href="/auction">
+          <a className="mr-4">View Auctions</a>
+        </Link>
+        <Link href="/gallery">
+          <a className="mr-4">Gallery</a>
+        </Link>
+      </nav>
+    </div>
+  );
+};
 
-      <div className="min-h-screen bg-gray-100">
-        <main className="container mx-auto px-4 py-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Welcome to Auto Vendor
-          </h1>
-          <p className="text-gray-600">
-            Site under construction - Coming soon with luxury automotive solutions
-          </p>
-        </main>
-      </div>
-    </>
-  )
+export async function getStaticProps() {
+  return {
+    props: {}, // Will be passed to the page component as props
+  };
 }
+
+export default HomePage;
