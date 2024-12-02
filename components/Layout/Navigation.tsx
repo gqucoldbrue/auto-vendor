@@ -39,6 +39,14 @@ const Navigation = () => {
     },
     { path: '/membership', label: 'Membership' },
     { path: '/contact', label: 'Contact' }
+
+    <button
+  onClick={() => setIsOpen(!isOpen)}
+  className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900"
+>
+  {isOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+</button>
+
   ];
 
   // Enhanced scroll handler with throttling
