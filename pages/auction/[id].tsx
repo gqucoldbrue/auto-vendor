@@ -20,10 +20,10 @@ const AuctionDetailPage = () => {
 };
 
 // Add static paths for build time
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   return {
-    paths: [], // No pre-rendered pages at build time
-    fallback: 'blocking' // Generate pages on-demand
+    paths: [],
+    fallback: true // or false/blocking depending on your needs
   };
 }
 
