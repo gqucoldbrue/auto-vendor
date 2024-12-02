@@ -9,6 +9,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'next',
+    'next/core-web-vitals',
+    'plugin:react/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -24,6 +27,7 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 'off',
+    "no-unused-vars": "warn",
     'react/react-in-jsx-scope': 'off',
   },
 };

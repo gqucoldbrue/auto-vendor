@@ -1,5 +1,10 @@
 {
   "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/admin": "pages/admin.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js"
+  "/gallery": "pages/gallery.js",
+  "/": "pages/index.js",
+  "/auction/[id]": "pages/auction/[id].js",
+  "/auction": "pages/auction.js"
 }

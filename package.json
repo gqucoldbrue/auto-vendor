@@ -30,5 +30,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --fix"
-  }
+  },
+  "browserslist": [
+    ">0.3%",
+    "not dead",
+    "not op_mini all"
+  ]
 }

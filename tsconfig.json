@@ -19,11 +19,16 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "baseUrl": "src",
+    "baseUrl": ".",  // Changed from "src" to "." for Next.js convention
+    "paths": {       // Added paths for better imports
+      "@/*": ["./src/*"]
+    },
     "incremental": true
   },
   "include": [
-    "src"
+    "src",
+    "pages",        // Added pages directory
+    "next-env.d.ts" // Added Next.js type definitions
   ],
   "exclude": [
     "node_modules"
