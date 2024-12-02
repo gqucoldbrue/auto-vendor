@@ -1,5 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Menu, Search, X, ChevronDown } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { 
+  Menu as MenuIcon, 
+  Search as SearchIcon, 
+  X as XIcon, 
+  ChevronDown as ChevronDownIcon 
+} from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
