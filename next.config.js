@@ -1,12 +1,17 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
-  swcMinify: false,  // Disabled for compatibility with React 17
-  // This tells Next.js how to handle certain imports
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, path: false };
-    return config;
-  }
-};
+  images: {
+    unoptimized: true // Required for static export
+  },
+  trailingSlash: true, // Recommended for static exports
 
-module.exports = nextConfig;
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        punycode: false,
+      };
+    }
+    return config;
+  },
+}
