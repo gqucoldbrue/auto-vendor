@@ -27,27 +27,11 @@ export const getStaticPaths = async () => {
   };
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps = async ({ params }) => {
   return {
-    props: {
-      id: params?.id
-    },
+    props: {}
   };
 }
 
-  export const getStaticPaths: GetStaticPaths = async () => {
-    return {
-      paths: [],
-      fallback: 'blocking'
-    };
-  };
-  
-  export const getStaticProps: GetStaticProps = async ({ params }: AuctionParams) => {
-    return {
-      props: {
-        id: params?.id || null
-      },
-    };
-}
 
 export default AuctionDetailPage;

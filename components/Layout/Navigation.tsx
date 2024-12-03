@@ -1,21 +1,40 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
-  Menu as MenuIcon, 
-  Search as SearchIcon, 
-  X as XIcon, 
-  ChevronDown as ChevronDownIcon 
+  Menu, 
+  Search, 
+  X, 
+  ChevronDown
 } from 'lucide-react';
 
+// Define TypeScript interfaces for better type safety
+interface DropdownItem {
+  path: string;
+  label: string;
+}
+
+interface NavigationLink {
+  path: string;
+  label: string;
+  dropdownItems?: DropdownItem[];
+}
+
 const Navigation = () => {
+  // State management with proper typing
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  
+  // Move currentPath state to use window only after mount to avoid SSR issues
+  const [currentPath, setCurrentPath] = useState<string>('/');
+  
+  useEffect(() => {
+    setCurrentPath(window.location.pathname);
+  }, []);
 
-  // Enhanced navigation structure with dropdowns
-  const navigationLinks = [
+  // Navigation structure moved outside component for better organization
+  const navigationLinks: NavigationLink[] = [
     { 
       path: '/', 
       label: 'Home' 
@@ -39,14 +58,6 @@ const Navigation = () => {
     },
     { path: '/membership', label: 'Membership' },
     { path: '/contact', label: 'Contact' }
-
-    <button
-  onClick={() => setIsOpen(!isOpen)}
-  className="lg:hidden p-2 rounded-md text-gray-600 hover:text-gray-900"
->
-  {isOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
-</button>
-
   ];
 
   // Enhanced scroll handler with throttling
@@ -61,38 +72,37 @@ const Navigation = () => {
         ticking = true;
       }
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Handle smooth page transitions
-  const handleNavigation = useCallback((path) => {
-    // Save current scroll position
+  const handleNavigation = useCallback((path: string) => {
     const currentScroll = window.scrollY;
+    const mainElement = document.querySelector('main');
     
-    // Add exit animation class to main content
-    document.querySelector('main')?.classList.add('fade-out');
-    
-    // After animation, navigate and restore scroll
-    setTimeout(() => {
-      window.location.href = path;
-      setCurrentPath(path);
-      window.scrollTo(0, currentScroll);
+    if (mainElement) {
+      mainElement.classList.add('fade-out');
       
-      // Remove exit animation class
-      requestAnimationFrame(() => {
-        document.querySelector('main')?.classList.remove('fade-out');
-        document.querySelector('main')?.classList.add('fade-in');
-      });
-    }, 300);
+      setTimeout(() => {
+        window.location.href = path;
+        setCurrentPath(path);
+        window.scrollTo(0, currentScroll);
+        
+        requestAnimationFrame(() => {
+          mainElement.classList.remove('fade-out');
+          mainElement.classList.add('fade-in');
+        });
+      }, 300);
+    }
   }, []);
 
-  // Enhanced search handling with validation and feedback
-  const handleSearch = (e) => {
+  // Enhanced search handling with validation
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim().length < 3) {
-      // Add subtle shake animation to search input
-      const searchInput = e.target.querySelector('input');
+      const searchInput = (e.target as HTMLFormElement).querySelector('input');
       searchInput?.classList.add('shake');
       setTimeout(() => searchInput?.classList.remove('shake'), 500);
       return;
@@ -110,7 +120,7 @@ const Navigation = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-          {/* Animated Logo */}
+          {/* Logo */}
           <button 
             onClick={() => handleNavigation('/')}
             className="group flex items-center space-x-2 transition-transform duration-300 hover:scale-105"
@@ -136,8 +146,9 @@ const Navigation = () => {
                 >
                   <span>{link.label}</span>
                   {link.dropdownItems && (
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 
-                      ${activeDropdown === link.path ? 'rotate-180' : ''}`} 
+                    <ChevronDown 
+                      className={`w-4 h-4 transition-transform duration-200 
+                        ${activeDropdown === link.path ? 'rotate-180' : ''}`}
                     />
                   )}
                 </button>
@@ -161,7 +172,7 @@ const Navigation = () => {
               </div>
             ))}
 
-            {/* Animated Search Bar */}
+            {/* Search Bar */}
             <form 
               onSubmit={handleSearch}
               className={`relative transition-all duration-300 ${
@@ -197,7 +208,7 @@ const Navigation = () => {
           </button>
         </div>
 
-        {/* Mobile Menu with Animation */}
+        {/* Mobile Menu */}
         <div className={`lg:hidden overflow-hidden transition-all duration-300 ${
           isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         }`}>
