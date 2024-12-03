@@ -1,37 +1,34 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import { GetStaticProps, GetStaticPaths } from 'next';
+import { GetStaticProps, GetStaticPaths } from 'next'
+// Import other necessary dependencies
 
-interface AuctionParams {
-  params: {
-    id: string;
-  };
-}
-
-const AuctionDetailPage = () => {
-  const router = useRouter();
-  const { id } = router.query;
-
+// Your page component
+const AuctionPage = ({ auction /* other props */ }) => {
   return (
-    <div className="container mx-auto px-4">
-      <h1>Auction Detail: {id}</h1>
-    </div>
-  );
-};
-
-// Add static paths for build time
-export const getStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: true // or false/blocking depending on your needs
-  };
+    // Your JSX here
+  )
 }
 
-export const getStaticProps = async ({ params }) => {
+// Add these functions below your component
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  // Fetch your auction data here using params.id
   return {
-    props: {}
-  };
+    props: {
+      auction: {
+        // Your auction data
+      }
+    }
+  }
 }
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  // Generate your auction paths here
+  return {
+    paths: [
+      { params: { id: '1' } },
+      { params: { id: '2' } }
+    ],
+    fallback: false
+  }
+}
 
-export default AuctionDetailPage;
+export default AuctionPage
