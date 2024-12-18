@@ -1,34 +1,25 @@
-import { GetStaticProps, GetStaticPaths } from 'next'
-// Import other necessary dependencies
+// pages/auction/[id].tsx
+"use client"; // Marking this as a Client Component
 
-// Your page component
+import React, { useState } from 'react';
+
 const AuctionPage = ({ auction /* other props */ }) => {
-  return (
-    // Your JSX here
-  )
-}
+    // Example state usage
+    const [bidAmount, setBidAmount] = useState(0);
 
-// Add these functions below your component
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // Fetch your auction data here using params.id
-  return {
-    props: {
-      auction: {
-        // Your auction data
-      }
-    }
-  }
-}
+    return (
+        <div>
+            <h1>Auction Details for {auction.title}</h1>
+            {/* Add more details about the auction */}
+            <input
+                type="number"
+                value={bidAmount}
+                onChange={(e) => setBidAmount(e.target.value)}
+                placeholder="Enter your bid"
+            />
+            <button>Place Bid</button>
+        </div>
+    );
+};
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  // Generate your auction paths here
-  return {
-    paths: [
-      { params: { id: '1' } },
-      { params: { id: '2' } }
-    ],
-    fallback: false
-  }
-}
-
-export default AuctionPage
+export default AuctionPage;
