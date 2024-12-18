@@ -1,16 +1,13 @@
 // First, import the Stripe package
 import Stripe from 'stripe';
 
-// Initialize Stripe with your secret key
-// We use process.env to safely access environment variables
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   // Set your preferred API version
-  apiVersion: '2024-11-20.acacia',
+  apiVersion: '2023-10-16', // Change this to a supported version
   // Enable TypeScript type suggestions
   typescript: true,
 });
 
-// Export the stripe instance so other files can use it
 export default stripe;
 
 // Helper function to format amounts for Stripe (converts dollars to cents)
