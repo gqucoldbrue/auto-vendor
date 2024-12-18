@@ -1,8 +1,12 @@
 // components/Layout/Layout.tsx
-import React, { FC } from 'react';
+import React from 'react';
 import Navigation from './Navigation';
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen">
       <Navigation />

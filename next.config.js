@@ -1,17 +1,13 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   images: {
-    unoptimized: true // Required for static export
+    domains: ['placeholder.com'], // Add any image domains you'll use
   },
-  trailingSlash: true, // Recommended for static exports
-
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        punycode: false,
-      };
-    }
-    return config;
+  typescript: {
+    ignoreBuildErrors: false,
   },
 }
+
+module.exports = nextConfig
