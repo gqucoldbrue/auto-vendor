@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+"use client"
+import React, { useState, useEffect, useCallback, use } from 'react';
 import { 
   Menu, 
   Search, 
