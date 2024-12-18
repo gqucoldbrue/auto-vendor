@@ -1,4 +1,6 @@
-// pages/index.tsx
+// app/page.tsx
+"use client"; // Marking this as a Client Component
+
 import React from 'react';
 import Link from 'next/link';
 
@@ -18,19 +20,21 @@ const HomePage = () => {
   );
 };
 
-export async function getStaticProps() {
-  return {
-    props: {}, // Will be passed to the page component as props
-  };
-}
+// Fetch data directly in the component if needed
+const Page = async () => {
+  // Example of fetching data (if needed)
+  // const res = await fetch('https://api.example.com/data');
+  // const data = await res.json();
 
-export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">
         <h1 className="text-4xl font-bold">Welcome to Auto Vendor</h1>
         {/* Your content here */}
+        <HomePage />
       </div>
     </main>
-  )
-}
+  );
+};
+
+export default Page;
