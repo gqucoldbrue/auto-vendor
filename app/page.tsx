@@ -3,6 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+// Define the type for the fetched data
+interface FetchedData {
+    title: string; // Adjust this according to the actual structure of your data
+    // Add other properties as needed
+}
+
 const HomePage = () => {
   return (
     <div className="container mx-auto px-4">
@@ -21,12 +27,12 @@ const HomePage = () => {
 
 // Main Page Component
 const Page = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<FetchedData | null>(null); // Specify the type for data
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch('https://api.example.com/data'); // Replace with your API
-      const result = await res.json();
+      const result: FetchedData = await res.json(); // Cast the result to the defined type
       setData(result);
     };
 
@@ -39,7 +45,7 @@ const Page = () => {
         <h1 className="text-4xl font-bold">Welcome to Auto Vendor</h1>
         {/* Render fetched data if available */}
         {data ? (
-          <div>{data.title}</div> // Adjust according to your data structure
+          <div>{data.title}</div> // Now TypeScript knows that data has a title property
         ) : (
           <p>Loading...</p>
         )}
