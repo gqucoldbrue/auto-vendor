@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image'; // Import the Image component from next/image
 
 export const ImageGallery = ({ images }) => {
   return (
@@ -12,13 +13,16 @@ export const ImageGallery = ({ images }) => {
           transition={{ delay: index * 0.2 }}
           className="relative aspect-[16/9] overflow-hidden rounded-lg"
         >
-          <img
-            src={image.url}
+          <Image
+            src={image.url} // Use the Image component
             alt={image.description}
+            layout="responsive" // Use layout prop for responsive images
+            width={500} // Set a width
+            height={300} // Set a height
             className="object-cover w-full h-full transform hover:scale-105 transition-transform duration-500"
           />
         </motion.div>
       ))}
     </div>
   );
-}
+};
