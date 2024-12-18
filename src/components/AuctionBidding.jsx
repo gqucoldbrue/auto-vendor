@@ -1,14 +1,12 @@
 import React from 'react';
 
+// src/components/AuctionBidding.jsx
 const AuctionBidding = () => {
-    
-    const _vehicleId = '';  
-    const _stripe = null;   
+    const _vehicleId = 'someValue'; // Remove or use this variable
 
     return (
         <div>
-            {/* Your auction bidding interface will go here */}
-            <p>Auction Bidding Component (Under Development)</p>
+            {/* Your component code */}
         </div>
     );
 };

@@ -1,4 +1,5 @@
 // components/Layout/Layout.tsx
+"use cient";
 import React from 'react';
 import Navigation from './Navigation';
 

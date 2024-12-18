@@ -1,10 +1,11 @@
-"use client";
-import React, { useState, useEffect, useCallback, use } from 'react';
+"use client"; // Marking this as a Client Component
+
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Menu, 
   Search, 
   X, 
-  ChevronDown
+  ChevronDown 
 } from 'lucide-react';
 
 // Define TypeScript interfaces for better type safety
@@ -26,20 +27,15 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  
-  // Move currentPath state to use window only after mount to avoid SSR issues
   const [currentPath, setCurrentPath] = useState<string>('/');
-  
+
   useEffect(() => {
     setCurrentPath(window.location.pathname);
   }, []);
 
   // Navigation structure moved outside component for better organization
   const navigationLinks: NavigationLink[] = [
-    { 
-      path: '/', 
-      label: 'Home' 
-    },
+    { path: '/', label: 'Home' },
     { 
       path: '/auctions', 
       label: 'Auctions',
