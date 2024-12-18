@@ -1,7 +1,6 @@
-// app/page.tsx
 "use client"; // Marking this as a Client Component
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 const HomePage = () => {
@@ -20,17 +19,30 @@ const HomePage = () => {
   );
 };
 
-// Fetch data directly in the component if needed
-const Page = async () => {
-  // Example of fetching data (if needed)
-  // const res = await fetch('https://api.example.com/data');
-  // const data = await res.json();
+// Main Page Component
+const Page = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch('https://api.example.com/data'); // Replace with your API
+      const result = await res.json();
+      setData(result);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">
         <h1 className="text-4xl font-bold">Welcome to Auto Vendor</h1>
-        {/* Your content here */}
+        {/* Render fetched data if available */}
+        {data ? (
+          <div>{data.title}</div> // Adjust according to your data structure
+        ) : (
+          <p>Loading...</p>
+        )}
         <HomePage />
       </div>
     </main>
