@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import type { Auction } from '@/types/auction';
+import Auction from "@/types/auction"; // Keep this if Auction is a named export
 
 interface AuctionPageProps {
   initialAuction?: Auction;
 }
 
+export interface Auction {
+  id: string;
+  title: string;
+  // Add other auction properties you need
+}
+
 const AuctionPage = ({ initialAuction }: AuctionPageProps) => {
   const params = useParams();
-  const [auction, setAuction] = useState(initialAuction);
+  const [auction, setAuction] = useState<Auction | undefined>(initialAuction); // Specify the type
   const [loading, setLoading] = useState(!initialAuction);
 
   useEffect(() => {
@@ -17,7 +23,7 @@ const AuctionPage = ({ initialAuction }: AuctionPageProps) => {
       const fetchAuction = async () => {
         try {
           const response = await fetch(`/api/auctions/${params.id}`);
-          const data = await response.json();
+          const data: Auction = await response.json(); // Cast the response to Auction type
           setAuction(data);
         } catch (error) {
           console.error('Error fetching auction:', error);
