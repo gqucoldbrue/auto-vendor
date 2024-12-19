@@ -9,6 +9,9 @@ interface AuctionPageProps {
 export interface Auction {
   id: string;
   title: string;
+  description?: string;
+  startingBid: number;
+
   // Add other auction properties you need
 }
 
