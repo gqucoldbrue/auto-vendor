@@ -86,19 +86,19 @@ const Navigation = () => {
     onMouseLeave={() => setActiveDropdown(null)}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-          <Link href="/" legacyBehavior>
-            <a className="group flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
+          <Link href="/">
+            <span className="group flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
               <span className="text-2xl font-light tracking-wider group-hover:tracking-widest transition-all">
                 AUTO-VENDOR
               </span>
-            </a>
+            </span>
           </Link>
 
           <div className="hidden lg:flex items-center space-x-8">
             {navigationLinks.map((link) => (
               <div key={link.path} className="relative" onMouseEnter={() => setActiveDropdown(link.path)}>
-                <Link href={link.path} legacyBehavior>
-                  <a className={`flex items-center space-x-1 text-gray-600 hover:text-gray-900 
+                <Link href={link.path}>
+                  <span className={`flex items-center space-x-1 text-gray-600 hover:text-gray-900 
                     transition-all duration-200 text-sm font-light tracking-wider
                     hover:tracking-widest ${currentPath === link.path ? 'text-gray-900' : ''}`}>
                     {link.label}
@@ -106,18 +106,18 @@ const Navigation = () => {
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 
                         ${activeDropdown === link.path ? 'rotate-180' : ''}`} />
                     )}
-                  </a>
+                  </span>
                 </Link>
 
                 {link.dropdownItems && activeDropdown === link.path && (
                   <div className="absolute top-full left-0 w-48 py-2 mt-1 bg-white shadow-lg rounded-lg
                     transform transition-all duration-200 opacity-100 scale-100">
                     {link.dropdownItems.map((item) => (
-                      <Link key={item.path} href={item.path} legacyBehavior>
-                        <a className="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:text-gray-900
+                      <Link key={item.path} href={item.path}>
+                        <span className="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:text-gray-900
                           hover:bg-gray-50 transition-colors duration-200">
                           {item.label}
-                        </a>
+                        </span>
                       </Link>
                     ))}
                   </div>
@@ -168,23 +168,23 @@ const Navigation = () => {
             <div className="flex flex-col space-y-4">
               {navigationLinks.map((link) => (
                 <div key={link.path}>
-                  <Link href={link.path} legacyBehavior>
-                    <a className={`block text-gray-600 hover:text-gray-900 transition-colors
+                  <Link href={link.path}>
+                    <span className={`block text-gray-600 hover:text-gray-900 transition-colors
                       duration-200 text-sm font-light tracking-wider ${
                         currentPath === link.path ? 'text-gray-900' : ''}`}
                       onClick={() => setIsOpen(false)}>
                       {link.label}
-                    </a>
+                    </span>
                   </Link>
                   {link.dropdownItems && (
                     <div className="ml-4 mt-2 space-y-2">
                       {link.dropdownItems.map((item) => (
-                        <Link key={item.path} href={item.path} legacyBehavior>
-                          <a className="block text-sm text-gray-500 hover:text-gray-900
+                        <Link key={item.path} href={item.path}>
+                          <span className="block text-sm text-gray-500 hover:text-gray-900
                             transition-colors duration-200"
                             onClick={() => setIsOpen(false)}>
                             {item.label}
-                          </a>
+                          </span>
                         </Link>
                       ))}
                     </div>
